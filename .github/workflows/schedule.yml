@@ -1,0 +1,36 @@
+name: PublishFeeds
+
+on:
+  push:
+    branches:
+      - '*'
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.100-rc.1.20452.10'
+
+    - name: Generate feeds
+      run: 'dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"'
+
+    - name: GitHub Pages action
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.SECRET_GITHUB_APITOKEN }}
+        publish_branch: gh-pages
+        publish_dir: generated
+        allow_empty_commit: false
+        keep_files: false
+        force_orphan: true

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "IssuesToRss": {
+      "commandName": "Project",
+      "commandLineArgs": "./generated"
+    }
+  }
+}
