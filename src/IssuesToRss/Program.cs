@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace IssuesToRss
         static async Task Main(string[] args)
         {
             var outputDirectory = FullPath.FromPath(args[0]);
-            var token = args.Length > 1 ? args[1] : null;
+            var githubToken = args.Length > 1 ? args[1] : null;
 
             var repositories = new[]
             {
@@ -26,8 +27,20 @@ namespace IssuesToRss
                 "dotnet/runtime",
             };
 
+            var excludedUsers = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "dotnet-bot",
+                "dotnet-maestro-bot",
+                "dotnet-maestro[bot]",
+            };
 
-            var client = token != null ? new GitHubClient(new ProductHeaderValue("issue-to-rss"), new InMemoryCredentialStore(new Credentials(token)))
+            var excludedLabels = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "Type: Dependency Update :arrow_up_small:",
+            };
+
+
+            var client = githubToken != null ? new GitHubClient(new ProductHeaderValue("issue-to-rss"), new InMemoryCredentialStore(new Credentials(githubToken)))
                                        : new GitHubClient(new ProductHeaderValue("issue-to-rss"));
 
             foreach (var repository in repositories)
@@ -40,6 +53,12 @@ namespace IssuesToRss
 
                 foreach (var issue in await GetIssuesForRepository(client, repositoryOwner, repositoryName))
                 {
+                    if (excludedUsers.Contains(issue.User.Login))
+                        continue;
+
+                    if (issue.Labels.Any(label => excludedLabels.Contains(label.Name)))
+                        continue;
+
                     bool isPullRequest = issue.PullRequest != null;
                     var title = (isPullRequest ? "PR: " : "") + issue.Title;
 
