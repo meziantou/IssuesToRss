@@ -166,8 +166,8 @@ namespace IssuesToRss
                 {
                     yield return new XElement("outline",
                         new XAttribute("type", "rss"),
-                        new XAttribute("text", data.Feed.Title),
-                        new XAttribute("title", data.Feed.Title),
+                        new XAttribute("text", data.Feed.Title.Text),
+                        new XAttribute("title", data.Feed.Title.Text),
                         new XAttribute("xmlUrl", Configuration.RootUrl + data.OutputRelativePath));
                 }
             }
@@ -187,7 +187,9 @@ namespace IssuesToRss
                 }
 
                 var template = GetTemplate("templates/index.html");
-                template = template.Replace("{Feeds}", sb.ToString());
+                template = template
+                    .Replace("{Feeds}", sb.ToString())
+                    .Replace("{BUILD_DATE}", HtmlEncoder.Default.Encode(DateTime.UtcNow.ToStringInvariant("O")));
 
                 File.WriteAllText(indexPath, template);
             }
