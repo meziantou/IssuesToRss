@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="templates\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Meziantou.Framework" Version="3.0.0" />
     <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.0" />
     <PackageReference Include="Octokit" Version="0.48.0" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0-rc.1.20451.14" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0-rc.1.20451.14" />
   </ItemGroup>
 
 </Project>
