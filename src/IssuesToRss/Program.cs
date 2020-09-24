@@ -45,6 +45,8 @@ namespace IssuesToRss
 
             await repositories.ParallelForEachAsync(degreeOfParallelism: 16, async repository =>
             {
+                Console.WriteLine("Generating feed for " + repository);
+
                 // Get issues
                 var items = new List<SyndicationItem>(200);
                 var parts = repository.Split('/');
@@ -92,6 +94,7 @@ namespace IssuesToRss
 
             // index.html
             {
+                Console.WriteLine("Generating index");
                 var indexPath = FullPath.Combine(outputDirectory, "index.html");
                 Directory.CreateDirectory(indexPath.Parent);
 
