@@ -41,12 +41,12 @@ namespace IssuesToRss
 
 
             var client = githubToken != null ? new GitHubClient(new ProductHeaderValue("issue-to-rss"), new InMemoryCredentialStore(new Credentials(githubToken)))
-                                       : new GitHubClient(new ProductHeaderValue("issue-to-rss"));
+                                             : new GitHubClient(new ProductHeaderValue("issue-to-rss"));
 
-            foreach (var repository in repositories)
+            await repositories.ParallelForEachAsync(degreeOfParallelism: 16, async repository =>
             {
                 // Get issues
-                var items = new List<SyndicationItem>();
+                var items = new List<SyndicationItem>(200);
                 var parts = repository.Split('/');
                 var repositoryOwner = parts[0];
                 var repositoryName = parts[1];
@@ -59,7 +59,7 @@ namespace IssuesToRss
                     if (issue.Labels.Any(label => excludedLabels.Contains(label.Name)))
                         continue;
 
-                    bool isPullRequest = issue.PullRequest != null;
+                    var isPullRequest = issue.PullRequest != null;
                     var title = (isPullRequest ? "PR: " : "") + issue.Title;
 
                     items.Add(new SyndicationItem(title, content: issue.Body, new Uri(issue.HtmlUrl), issue.HtmlUrl, issue.CreatedAt)
@@ -88,7 +88,7 @@ namespace IssuesToRss
                 var rssFormatter = new Rss20FeedFormatter(feed, serializeExtensionsAsAtom: false);
                 rssFormatter.WriteTo(xmlWriter);
                 xmlWriter.Flush();
-            }
+            });
 
             // index.html
             {
