@@ -46,6 +46,7 @@ namespace IssuesToRss
             "dotnet-bot",
             "dotnet-maestro-bot",
             "dotnet-maestro[bot]",
+            "cxwtool",
         };
 
         public static IReadOnlySet<string> ExcludedLabels { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
