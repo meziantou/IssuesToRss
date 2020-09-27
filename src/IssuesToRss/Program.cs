@@ -144,6 +144,7 @@ namespace IssuesToRss
             // Write feeds
             foreach (var feedData in feeds)
             {
+                Console.WriteLine($"Writing feed '{feedData.OutputRelativePath}'");
                 var feedPath = FullPath.Combine(outputDirectory, feedData.OutputRelativePath);
                 Directory.CreateDirectory(feedPath.Parent);
                 using var stream = File.OpenWrite(feedPath);
