@@ -30,6 +30,7 @@ namespace IssuesToRss
             "dotnet/efcore",
             "dotnet/EntityFramework.Docs",
             "dotnet/format",
+            "dotnet/interactive",
             "dotnet/machinelearning",
             "dotnet/orleans",
             "dotnet/roslyn",
