@@ -87,8 +87,17 @@ namespace IssuesToRss
                     var isPullRequest = issue.PullRequest != null;
                     var title = (isPullRequest ? "PR: " : "") + issue.Title;
 
-                    var item = new SyndicationItem(title, content: issue.Body, new Uri(issue.HtmlUrl), issue.HtmlUrl, issue.CreatedAt)
+                    var item = new SyndicationItem
                     {
+                        Id = issue.HtmlUrl,
+                        Title = new TextSyndicationContent(SanitizeString(title)),
+                        Content = new TextSyndicationContent(SanitizeString(issue.Body)),
+                        Links =
+                        {
+                            SyndicationLink.CreateAlternateLink(new Uri(issue.HtmlUrl)),
+                        },
+                        PublishDate = issue.CreatedAt,
+                        LastUpdatedTime = issue.CreatedAt,
                         Authors =
                         {
                             new SyndicationPerson(issue.User.Email, issue.User.Login, issue.User.HtmlUrl),
@@ -224,6 +233,36 @@ namespace IssuesToRss
                 PageCount = 2,
             };
             return await client.Issue.GetAllForRepository(owner, name, request, options);
+        }
+
+        private static string SanitizeString(string str)
+        {
+            var sb = new StringBuilder(str.Length);
+            Span<char> chars = stackalloc char[2];
+            foreach (var rune in str.EnumerateRunes())
+            {
+                if (!rune.TryEncodeToUtf16(chars, out var written))
+                    continue;
+
+                if (written == 1)
+                {
+                    if (!XmlConvert.IsXmlChar(chars[0]))
+                        continue;
+                }
+                else if (written == 2)
+                {
+                    if (!XmlConvert.IsXmlSurrogatePair(chars[0], chars[1]))
+                        continue;
+                }
+                else
+                {
+                    throw new Exception("written = " + written);
+                }
+
+                sb.Append(chars.Slice(0, written));
+            }
+
+            return sb.ToString();
         }
 
         private sealed class FeedData
