@@ -11,8 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.21.1" />
     <PackageReference Include="Meziantou.Framework" Version="3.0.0" />
-    <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.0" />
+    <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.1" />
     <PackageReference Include="Octokit" Version="0.48.0" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0-rc.1.20451.14" />
     <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0-rc.1.20451.14" />
