@@ -22,6 +22,7 @@ namespace IssuesToRss
 
         public static IReadOnlyCollection<string> Repositories { get; } = new[]
         {
+            "dotnet/announcements",
             "dotnet/aspnetcore",
             "dotnet/AspNetCore.Docs",
             "dotnet/csharplang",
@@ -30,6 +31,7 @@ namespace IssuesToRss
             "dotnet/efcore",
             "dotnet/EntityFramework.Docs",
             "dotnet/format",
+            "dotnet/fsharp",
             "dotnet/interactive",
             "dotnet/machinelearning",
             "dotnet/orleans",
