@@ -34,6 +34,7 @@ namespace IssuesToRss
             "dotnet/fsharp",
             "dotnet/interactive",
             "dotnet/machinelearning",
+            "dotnet/msbuild",
             "dotnet/orleans",
             "dotnet/roslyn",
             "dotnet/roslyn-analyzers",
