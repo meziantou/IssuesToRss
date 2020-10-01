@@ -39,6 +39,7 @@ namespace IssuesToRss
             "dotnet/roslyn",
             "dotnet/roslyn-analyzers",
             "dotnet/runtime",
+            "dotnet/sdk",
             "dotnet/SqlClient",
             "dotnet/windowsdesktop",
             "dotnet/winforms",
