@@ -50,6 +50,7 @@ namespace IssuesToRss
         public static IReadOnlySet<string> ExcludedUsers { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "dependabot",
+            "dependabot[bot]",
             "dotnet-bot",
             "dotnet-maestro-bot",
             "dotnet-maestro[bot]",
