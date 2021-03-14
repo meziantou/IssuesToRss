@@ -93,7 +93,7 @@ namespace IssuesToRss
                         continue;
 
                     var isPullRequest = issue.PullRequest != null;
-                    var title = (isPullRequest ? "PR: " : "Issue: ") + issue.Title;
+                    var title = (isPullRequest ? "PR: " : "Issue: ") + issue.Title + " - @" + issue.User.Login;
 
                     var item = new SyndicationItem
                     {
