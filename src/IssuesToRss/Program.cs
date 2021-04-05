@@ -49,12 +49,13 @@ namespace IssuesToRss
 
         public static IReadOnlySet<string> ExcludedUsers { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
+            "cxwtool",
             "dependabot",
             "dependabot[bot]",
             "dotnet-bot",
             "dotnet-maestro-bot",
             "dotnet-maestro[bot]",
-            "cxwtool",
+            "pr-benchmarks[bot]",
         };
 
         public static IReadOnlySet<string> ExcludedLabels { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
