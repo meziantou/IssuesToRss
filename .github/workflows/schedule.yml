@@ -34,3 +34,6 @@ jobs:
         allow_empty_commit: false
         keep_files: false
         force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+
