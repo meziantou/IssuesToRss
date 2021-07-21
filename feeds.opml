@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<opml version="1.0">
+  <head>
+    <title>GitHub issues feeds</title>
+  </head>
+  <body>
+    <outline type="rss" text="dotnet/announcements Issues" title="dotnet/announcements Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/announcements.issues.rss" />
+    <outline type="rss" text="dotnet/announcements Pull Requests" title="dotnet/announcements Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/announcements.pr.rss" />
+    <outline type="rss" text="dotnet/AspNetCore.Docs Issues" title="dotnet/AspNetCore.Docs Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/AspNetCore.Docs.issues.rss" />
+    <outline type="rss" text="dotnet/AspNetCore.Docs Pull Requests" title="dotnet/AspNetCore.Docs Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/AspNetCore.Docs.pr.rss" />
+    <outline type="rss" text="dotnet/aspnetcore Issues" title="dotnet/aspnetcore Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/aspnetcore.issues.rss" />
+    <outline type="rss" text="dotnet/aspnetcore Pull Requests" title="dotnet/aspnetcore Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/aspnetcore.pr.rss" />
+    <outline type="rss" text="dotnet/csharplang Issues" title="dotnet/csharplang Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/csharplang.issues.rss" />
+    <outline type="rss" text="dotnet/csharplang Pull Requests" title="dotnet/csharplang Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/csharplang.pr.rss" />
+    <outline type="rss" text="dotnet/docs-desktop Issues" title="dotnet/docs-desktop Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/docs-desktop.issues.rss" />
+    <outline type="rss" text="dotnet/docs-desktop Pull Requests" title="dotnet/docs-desktop Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/docs-desktop.pr.rss" />
+    <outline type="rss" text="dotnet/docs Issues" title="dotnet/docs Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/docs.issues.rss" />
+    <outline type="rss" text="dotnet/docs Pull Requests" title="dotnet/docs Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/docs.pr.rss" />
+    <outline type="rss" text="dotnet/efcore Issues" title="dotnet/efcore Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/efcore.issues.rss" />
+    <outline type="rss" text="dotnet/efcore Pull Requests" title="dotnet/efcore Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/efcore.pr.rss" />
+    <outline type="rss" text="dotnet/EntityFramework.Docs Issues" title="dotnet/EntityFramework.Docs Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/EntityFramework.Docs.issues.rss" />
+    <outline type="rss" text="dotnet/EntityFramework.Docs Pull Requests" title="dotnet/EntityFramework.Docs Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/EntityFramework.Docs.pr.rss" />
+    <outline type="rss" text="dotnet/format Issues" title="dotnet/format Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/format.issues.rss" />
+    <outline type="rss" text="dotnet/format Pull Requests" title="dotnet/format Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/format.pr.rss" />
+    <outline type="rss" text="dotnet/fsharp Issues" title="dotnet/fsharp Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/fsharp.issues.rss" />
+    <outline type="rss" text="dotnet/fsharp Pull Requests" title="dotnet/fsharp Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/fsharp.pr.rss" />
+    <outline type="rss" text="dotnet/interactive Issues" title="dotnet/interactive Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/interactive.issues.rss" />
+    <outline type="rss" text="dotnet/interactive Pull Requests" title="dotnet/interactive Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/interactive.pr.rss" />
+    <outline type="rss" text="dotnet/machinelearning Issues" title="dotnet/machinelearning Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/machinelearning.issues.rss" />
+    <outline type="rss" text="dotnet/machinelearning Pull Requests" title="dotnet/machinelearning Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/machinelearning.pr.rss" />
+    <outline type="rss" text="dotnet/msbuild Issues" title="dotnet/msbuild Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/msbuild.issues.rss" />
+    <outline type="rss" text="dotnet/msbuild Pull Requests" title="dotnet/msbuild Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/msbuild.pr.rss" />
+    <outline type="rss" text="dotnet/orleans Issues" title="dotnet/orleans Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/orleans.issues.rss" />
+    <outline type="rss" text="dotnet/orleans Pull Requests" title="dotnet/orleans Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/orleans.pr.rss" />
+    <outline type="rss" text="dotnet/roslyn-analyzers Issues" title="dotnet/roslyn-analyzers Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/roslyn-analyzers.issues.rss" />
+    <outline type="rss" text="dotnet/roslyn-analyzers Pull Requests" title="dotnet/roslyn-analyzers Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/roslyn-analyzers.pr.rss" />
+    <outline type="rss" text="dotnet/roslyn Issues" title="dotnet/roslyn Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/roslyn.issues.rss" />
+    <outline type="rss" text="dotnet/roslyn Pull Requests" title="dotnet/roslyn Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/roslyn.pr.rss" />
+    <outline type="rss" text="dotnet/runtime Issues" title="dotnet/runtime Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/runtime.issues.rss" />
+    <outline type="rss" text="dotnet/runtime Pull Requests" title="dotnet/runtime Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/runtime.pr.rss" />
+    <outline type="rss" text="dotnet/runtimelab Issues" title="dotnet/runtimelab Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/runtimelab.issues.rss" />
+    <outline type="rss" text="dotnet/runtimelab Pull Requests" title="dotnet/runtimelab Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/runtimelab.pr.rss" />
+    <outline type="rss" text="dotnet/sdk Issues" title="dotnet/sdk Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/sdk.issues.rss" />
+    <outline type="rss" text="dotnet/sdk Pull Requests" title="dotnet/sdk Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/sdk.pr.rss" />
+    <outline type="rss" text="dotnet/SqlClient Issues" title="dotnet/SqlClient Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/SqlClient.issues.rss" />
+    <outline type="rss" text="dotnet/SqlClient Pull Requests" title="dotnet/SqlClient Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/SqlClient.pr.rss" />
+    <outline type="rss" text="dotnet/windowsdesktop Issues" title="dotnet/windowsdesktop Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/windowsdesktop.issues.rss" />
+    <outline type="rss" text="dotnet/windowsdesktop Pull Requests" title="dotnet/windowsdesktop Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/windowsdesktop.pr.rss" />
+    <outline type="rss" text="dotnet/winforms Issues" title="dotnet/winforms Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/winforms.issues.rss" />
+    <outline type="rss" text="dotnet/winforms Pull Requests" title="dotnet/winforms Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/winforms.pr.rss" />
+    <outline type="rss" text="dotnet/wpf Issues" title="dotnet/wpf Issues" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/wpf.issues.rss" />
+    <outline type="rss" text="dotnet/wpf Pull Requests" title="dotnet/wpf Pull Requests" xmlUrl="https://meziantou.github.io/IssuesToRss/dotnet/wpf.pr.rss" />
+  </body>
+</opml>
