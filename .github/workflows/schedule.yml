@@ -1,6 +1,7 @@
 name: PublishFeeds
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - '*'
