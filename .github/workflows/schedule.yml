@@ -13,10 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: true
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
     steps:
     - uses: actions/checkout@v2
-
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -25,16 +26,23 @@ jobs:
     - name: Generate feeds
       run: 'dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"'
 
-    - name: GitHub Pages action
-      if: ${{ github.ref == 'refs/heads/main' }}
-      uses: peaceiris/actions-gh-pages@v3.7.3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: generated
-        allow_empty_commit: false
-        keep_files: false
-        force_orphan: true
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
+        path: './generated'
 
+  deploy:  
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
