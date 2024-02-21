@@ -20,8 +20,8 @@ namespace IssuesToRss
         public const string GitHubRepositoryUrl = "https://github.com/meziantou/IssuesToRss/";
         public const string RootUrl = "https://meziantou.github.io/IssuesToRss/";
 
-        public static IReadOnlyCollection<string> Repositories { get; } = new[]
-        {
+        public static IReadOnlyCollection<string> Repositories { get; } =
+        [
             "dotnet/announcements",
             "dotnet/aspnetcore",
             "dotnet/AspNetCore.Docs",
@@ -45,7 +45,7 @@ namespace IssuesToRss
             "dotnet/windowsdesktop",
             "dotnet/winforms",
             "dotnet/wpf",
-        };
+        ];
 
         public static IReadOnlySet<string> ExcludedUsers { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {

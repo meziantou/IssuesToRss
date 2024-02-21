@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+	<TargetFramework>net$(NETCoreAppMaximumVersion)</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -11,12 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.22.0" />
-    <PackageReference Include="Meziantou.Framework" Version="3.0.1" />
-    <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.1" />
-    <PackageReference Include="Octokit" Version="0.48.0" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="6.0.0" />
+    <PackageReference Include="Markdig" Version="0.35.0" />
+    <PackageReference Include="Meziantou.Framework" Version="3.0.39" />
+    <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.12" />
+    <PackageReference Include="Octokit" Version="9.1.2" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
