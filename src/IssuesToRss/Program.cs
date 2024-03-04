@@ -12,6 +12,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using Markdig;
 using Meziantou.Framework;
 using Meziantou.Framework.Http;
 
@@ -25,6 +26,7 @@ internal static class Configuration
     public static IReadOnlyCollection<string> Repositories { get; } =
     [
         "dotnet/announcements",
+        "dotnet/aspire",
         "dotnet/aspnetcore",
         "dotnet/AspNetCore.Docs",
         "dotnet/csharplang",
@@ -72,6 +74,8 @@ internal static class Program
     {
         var outputDirectory = FullPath.FromPath(args[0]);
         var githubToken = args.Length > 1 ? args[1] : null;
+        
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
         var feeds = new List<FeedData>();
         await Configuration.Repositories.ParallelForEachAsync(degreeOfParallelism: 16, async repository =>
@@ -100,7 +104,7 @@ internal static class Program
                 {
                     Id = issue.HtmlUrl,
                     Title = new TextSyndicationContent(SanitizeString(title)),
-                    Content = new TextSyndicationContent(SanitizeString(Markdig.Markdown.ToHtml(issue.Body ?? ""))),
+                    Content = new TextSyndicationContent(SanitizeString(Markdown.ToHtml(issue.Body ?? "", pipeline))),
                     Links =
                     {
                         SyndicationLink.CreateAlternateLink(new Uri(issue.HtmlUrl ?? "")),
