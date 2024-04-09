@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.36.2" />
+    <PackageReference Include="Markdig" Version="0.37.0" />
     <PackageReference Include="Meziantou.Framework" Version="3.0.39" />
     <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.12" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
