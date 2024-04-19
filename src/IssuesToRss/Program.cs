@@ -77,6 +77,25 @@ internal static class Program
         
         var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
+        string ConvertMarkdownToHtml(string markdown)
+        {
+            try
+            {
+                return Markdown.ToHtml(markdown ?? "", pipeline);
+            }
+            catch
+            {
+                try
+                {
+                    return Markdown.ToHtml(markdown ?? "");
+                }
+                catch
+                {
+                    return markdown;
+                }
+            }
+        }
+
         var feeds = new List<FeedData>();
         await Configuration.Repositories.ParallelForEachAsync(degreeOfParallelism: 16, async repository =>
         {
@@ -104,7 +123,7 @@ internal static class Program
                 {
                     Id = issue.HtmlUrl,
                     Title = new TextSyndicationContent(SanitizeString(title)),
-                    Content = new TextSyndicationContent(SanitizeString(Markdown.ToHtml(issue.Body ?? "", pipeline))),
+                    Content = new TextSyndicationContent(SanitizeString(ConvertMarkdownToHtml(issue.Body))),
                     Links =
                     {
                         SyndicationLink.CreateAlternateLink(new Uri(issue.HtmlUrl ?? "")),
