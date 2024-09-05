@@ -16,16 +16,23 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
     steps:
-    - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+    - uses: actions/checkout@v4
     
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4
+      uses: actions/setup-dotnet@v4
 
+    # NuGet is flaky recently, let's retry the step a few time
     - name: Generate feeds
-      run: 'dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"'
+      run: |
+        for ($i = 0; $i -lt 5; $i++) {
+            dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"
+            if ($LASTEXITCODE -eq 0) { exit 0 }
+            Start-Sleep 10
+        }
+        exit 1
 
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+      uses: actions/upload-pages-artifact@v3
       with:
         path: './generated'
 
@@ -44,4 +51,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+      uses: actions/deploy-pages@v4
