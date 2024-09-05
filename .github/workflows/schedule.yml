@@ -23,6 +23,7 @@ jobs:
 
     # NuGet is flaky recently, let's retry the step a few time
     - name: Generate feeds
+      shell: pwsh
       run: |
         for ($i = 0; $i -lt 5; $i++) {
             dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"
