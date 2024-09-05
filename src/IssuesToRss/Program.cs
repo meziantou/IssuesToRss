@@ -123,7 +123,7 @@ internal static class Program
                 {
                     Id = issue.HtmlUrl,
                     Title = new TextSyndicationContent(SanitizeString(title)),
-                    Content = new TextSyndicationContent(SanitizeString(ConvertMarkdownToHtml(issue.Body))),
+                    Content = new TextSyndicationContent(SanitizeString(ConvertMarkdownToHtml(issue.Body ?? ""))),
                     Links =
                     {
                         SyndicationLink.CreateAlternateLink(new Uri(issue.HtmlUrl ?? "")),
