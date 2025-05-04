@@ -26,7 +26,7 @@ jobs:
       shell: pwsh
       run: |
         for ($i = 0; $i -lt 5; $i++) {
-            dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.SECRET_GITHUB_APITOKEN }}"
+            dotnet run --project src/IssuesToRss/IssuesToRss.csproj -- generated "${{ secrets.GITHUB_TOKEN }}"
             if ($LASTEXITCODE -eq 0) {
               exit 0
             }
