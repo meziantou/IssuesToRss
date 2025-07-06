@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".github/workflows/schedule.yml" />
+  </Folder>
+  <Project Path="src/IssuesToRss/IssuesToRss.csproj" />
+</Solution>
