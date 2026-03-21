@@ -67,6 +67,14 @@ internal static class Configuration
     {
         "Type: Dependency Update :arrow_up_small:",
     };
+
+    public static IReadOnlyDictionary<string, IReadOnlySet<string>> ExcludedTitlePrefixes { get; } = new Dictionary<string, IReadOnlySet<string>>(StringComparer.OrdinalIgnoreCase)
+    {
+        ["dotnet/aspire"] = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "[Deployment E2E] Nightly test failure",
+        },
+    };
 }
 
 internal static class Program
@@ -108,6 +116,7 @@ internal static class Program
             var parts = repository.Split('/');
             var repositoryOwner = parts[0];
             var repositoryName = parts[1];
+            Configuration.ExcludedTitlePrefixes.TryGetValue(repository, out var excludedTitlePrefixes);
 
             await foreach (var issue in GetIssuesForRepository(repositoryOwner, repositoryName, githubToken).TakeAsync(200))
             {
@@ -115,6 +124,10 @@ internal static class Program
                     continue;
 
                 if (issue.Labels != null && issue.Labels.Any(label => label.Name != null && Configuration.ExcludedLabels.Contains(label.Name)))
+                    continue;
+
+                if (issue.Title != null && excludedTitlePrefixes != null &&
+                    excludedTitlePrefixes.Any(prefix => issue.Title.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)))
                     continue;
 
                 var isPullRequest = issue.PullRequest != null;
