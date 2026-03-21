@@ -9,6 +9,7 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -57,6 +58,7 @@ internal static class Configuration
         "dependabot",
         "dependabot[bot]",
         "dotnet-bot",
+        "dotnet-bot[bot]",        
         "dotnet-policy-service[bot]",
         "dotnet-maestro-bot",
         "dotnet-maestro[bot]",
@@ -74,6 +76,14 @@ internal static class Configuration
         {
             "[Deployment E2E] Nightly test failure",
         },
+    };
+
+    public static IReadOnlyDictionary<string, IReadOnlyCollection<Regex>> ExcludedTitleRegexes { get; } = new Dictionary<string, IReadOnlyCollection<Regex>>(StringComparer.OrdinalIgnoreCase)
+    {
+        ["dotnet/aspire"] =
+        [
+            new Regex(@"^\[.*-burndown\] Daily Burndown Report", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled),
+        ],
     };
 }
 
@@ -117,6 +127,7 @@ internal static class Program
             var repositoryOwner = parts[0];
             var repositoryName = parts[1];
             Configuration.ExcludedTitlePrefixes.TryGetValue(repository, out var excludedTitlePrefixes);
+            Configuration.ExcludedTitleRegexes.TryGetValue(repository, out var excludedTitleRegexes);
 
             await foreach (var issue in GetIssuesForRepository(repositoryOwner, repositoryName, githubToken).TakeAsync(200))
             {
@@ -128,6 +139,10 @@ internal static class Program
 
                 if (issue.Title != null && excludedTitlePrefixes != null &&
                     excludedTitlePrefixes.Any(prefix => issue.Title.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)))
+                    continue;
+
+                if (issue.Title != null && excludedTitleRegexes != null &&
+                    excludedTitleRegexes.Any(regex => regex.IsMatch(issue.Title)))
                     continue;
 
                 var isPullRequest = issue.PullRequest != null;
