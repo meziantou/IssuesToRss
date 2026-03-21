@@ -58,6 +58,7 @@ internal static class Configuration
         "dependabot",
         "dependabot[bot]",
         "dotnet-bot",
+        "dotnet-bot[bot]",        
         "dotnet-policy-service[bot]",
         "dotnet-maestro-bot",
         "dotnet-maestro[bot]",
