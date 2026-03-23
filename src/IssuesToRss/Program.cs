@@ -27,7 +27,6 @@ internal static class Configuration
     public static IReadOnlyCollection<string> Repositories { get; } =
     [
         "dotnet/announcements",
-        "dotnet/aspire",
         "dotnet/aspnetcore",
         "dotnet/AspNetCore.Docs",
         "dotnet/csharplang",
@@ -50,6 +49,7 @@ internal static class Configuration
         "dotnet/windowsdesktop",
         "dotnet/winforms",
         "dotnet/wpf",
+        "microsoft/aspire",
     ];
 
     public static IReadOnlySet<string> ExcludedUsers { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
