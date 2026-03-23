@@ -68,6 +68,7 @@ internal static class Configuration
     public static IReadOnlySet<string> ExcludedLabels { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "Type: Dependency Update :arrow_up_small:",
+        "test-failure",
     };
 
     public static IReadOnlyDictionary<string, IReadOnlySet<string>> ExcludedTitlePrefixes { get; } = new Dictionary<string, IReadOnlySet<string>>(StringComparer.OrdinalIgnoreCase)
@@ -80,7 +81,7 @@ internal static class Configuration
 
     public static IReadOnlyDictionary<string, IReadOnlyCollection<Regex>> ExcludedTitleRegexes { get; } = new Dictionary<string, IReadOnlyCollection<Regex>>(StringComparer.OrdinalIgnoreCase)
     {
-        ["dotnet/aspire"] =
+        ["microsoft/aspire"] =
         [
             new Regex(@"^\[.*-burndown\] Daily Burndown Report", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled),
         ],
