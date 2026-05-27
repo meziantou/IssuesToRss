@@ -58,7 +58,7 @@ internal static class Configuration
         "dependabot",
         "dependabot[bot]",
         "dotnet-bot",
-        "dotnet-bot[bot]",        
+        "dotnet-bot[bot]",
         "dotnet-policy-service[bot]",
         "dotnet-maestro-bot",
         "dotnet-maestro[bot]",
@@ -94,7 +94,7 @@ internal static class Program
     {
         var outputDirectory = FullPath.FromPath(args[0]);
         var githubToken = args.Length > 1 ? args[1] : null;
-        
+
         var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
         string ConvertMarkdownToHtml(string markdown)
@@ -130,7 +130,7 @@ internal static class Program
             Configuration.ExcludedTitlePrefixes.TryGetValue(repository, out var excludedTitlePrefixes);
             Configuration.ExcludedTitleRegexes.TryGetValue(repository, out var excludedTitleRegexes);
 
-            await foreach (var issue in GetIssuesForRepository(repositoryOwner, repositoryName, githubToken).TakeAsync(200))
+            await foreach (var issue in GetIssuesForRepository(repositoryOwner, repositoryName, githubToken).Take(200))
             {
                 if (issue.User?.Login is string login && Configuration.ExcludedUsers.Contains(login))
                     continue;
@@ -297,7 +297,7 @@ internal static class Program
             foreach (var issue in issues!)
                 yield return issue;
 
-            url = httpRequest.Headers.ParseLinkHeaders().FirstOrDefault(link => link.Rel == "next")?.Url;
+            url = httpRequest.Headers.EnumerateLinkHeaders().FirstOrDefault(link => link.Rel == "next")?.Url;
         }
     }
 
