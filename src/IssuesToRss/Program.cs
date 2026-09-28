@@ -13,9 +13,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using Markdig;
 using Meziantou.Framework;
 using Meziantou.Framework.Http;
+using Meziantou.Framework.Markdown;
 
 namespace IssuesToRss;
 
@@ -101,13 +101,13 @@ internal static class Program
         {
             try
             {
-                return Markdown.ToHtml(markdown ?? "", pipeline);
+                return MarkdownConverter.ToHtml(markdown ?? "", pipeline);
             }
             catch
             {
                 try
                 {
-                    return Markdown.ToHtml(markdown ?? "");
+                    return MarkdownConverter.ToHtml(markdown ?? "");
                 }
                 catch
                 {
