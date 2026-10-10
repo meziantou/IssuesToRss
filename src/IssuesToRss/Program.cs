@@ -9,7 +9,6 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -19,78 +18,9 @@ using Meziantou.Framework.Markdown;
 
 namespace IssuesToRss;
 
-internal static class Configuration
-{
-    public const string GitHubRepositoryUrl = "https://github.com/meziantou/IssuesToRss/";
-    public const string RootUrl = "https://meziantou.github.io/IssuesToRss/";
-
-    public static IReadOnlyCollection<string> Repositories { get; } =
-    [
-        "dotnet/announcements",
-        "dotnet/aspnetcore",
-        "dotnet/AspNetCore.Docs",
-        "dotnet/csharplang",
-        "dotnet/docs",
-        "dotnet/docs-desktop",
-        "dotnet/efcore",
-        "dotnet/EntityFramework.Docs",
-        "dotnet/format",
-        "dotnet/fsharp",
-        "dotnet/interactive",
-        "dotnet/machinelearning",
-        "dotnet/msbuild",
-        "dotnet/orleans",
-        "dotnet/roslyn",
-        "dotnet/roslyn-analyzers",
-        "dotnet/runtime",
-        "dotnet/runtimelab",
-        "dotnet/sdk",
-        "dotnet/SqlClient",
-        "dotnet/windowsdesktop",
-        "dotnet/winforms",
-        "dotnet/wpf",
-        "microsoft/aspire",
-    ];
-
-    public static IReadOnlySet<string> ExcludedUsers { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-    {
-        "cxwtool",
-        "dependabot",
-        "dependabot[bot]",
-        "dotnet-bot",
-        "dotnet-bot[bot]",
-        "dotnet-policy-service[bot]",
-        "dotnet-maestro-bot",
-        "dotnet-maestro[bot]",
-        "pr-benchmarks[bot]",
-    };
-
-    public static IReadOnlySet<string> ExcludedLabels { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-    {
-        "Type: Dependency Update :arrow_up_small:",
-        "test-failure",
-    };
-
-    public static IReadOnlyDictionary<string, IReadOnlySet<string>> ExcludedTitlePrefixes { get; } = new Dictionary<string, IReadOnlySet<string>>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["dotnet/aspire"] = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "[Deployment E2E] Nightly test failure",
-        },
-    };
-
-    public static IReadOnlyDictionary<string, IReadOnlyCollection<Regex>> ExcludedTitleRegexes { get; } = new Dictionary<string, IReadOnlyCollection<Regex>>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["microsoft/aspire"] =
-        [
-            new Regex(@"^\[.*-burndown\] Daily Burndown Report", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled),
-        ],
-    };
-}
-
 internal static class Program
 {
-    static async Task Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var outputDirectory = FullPath.FromPath(args[0]);
         var githubToken = args.Length > 1 ? args[1] : null;
@@ -158,8 +88,8 @@ internal static class Program
                     {
                         SyndicationLink.CreateAlternateLink(new Uri(issue.HtmlUrl ?? "")),
                     },
-                    PublishDate = issue.CreatedAt,
-                    LastUpdatedTime = issue.CreatedAt,
+                    PublishDate = new DateTimeOffset(issue.CreatedAt),
+                    LastUpdatedTime = new DateTimeOffset(issue.CreatedAt),
                     Authors =
                     {
                         new SyndicationPerson(issue.User?.Email, issue.User?.Login, issue.User?.HtmlUrl),
@@ -210,7 +140,7 @@ internal static class Program
             }
         });
 
-        feeds.Sort((a, b) => a.OutputRelativePath.CompareTo(b.OutputRelativePath));
+        feeds.Sort((a, b) => string.Compare(a.OutputRelativePath, b.OutputRelativePath, StringComparison.OrdinalIgnoreCase));
 
         // Write feeds
         foreach (var feedData in feeds)
@@ -265,8 +195,8 @@ internal static class Program
 
             var template = GetTemplate("templates/index.html");
             template = template
-                .Replace("{Feeds}", sb.ToString())
-                .Replace("{BUILD_DATE}", HtmlEncoder.Default.Encode(DateTime.UtcNow.ToStringInvariant("O")));
+                .Replace("{Feeds}", sb.ToString(), StringComparison.Ordinal)
+                .Replace("{BUILD_DATE}", HtmlEncoder.Default.Encode(DateTime.UtcNow.ToStringInvariant("O")), StringComparison.Ordinal);
 
             File.WriteAllText(indexPath, template);
         }
@@ -325,7 +255,7 @@ internal static class Program
             }
             else
             {
-                throw new Exception("written = " + written);
+                throw new InvalidOperationException("written = " + written);
             }
 
             sb.Append(chars[..written]);
