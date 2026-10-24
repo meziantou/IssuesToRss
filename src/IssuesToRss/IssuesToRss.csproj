@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Meziantou.Framework" Version="6.0.14" />
-    <PackageReference Include="Meziantou.Framework.FullPath" Version="3.0.12" />
+    <PackageReference Include="Meziantou.Framework" Version="6.0.15" />
+    <PackageReference Include="Meziantou.Framework.FullPath" Version="3.0.13" />
     <PackageReference Include="Meziantou.Framework.Http" Version="2.0.3" />
     <PackageReference Include="Meziantou.Framework.Markdown" Version="1.0.4" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.12" />
